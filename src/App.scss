@@ -1,0 +1,92 @@
+.sign-btn{
+  display:flex;
+  gap:2vh;
+  justify-content: center;
+}
+#modal-header{
+  margin-left: auto
+}
+#profile{
+  text-wrap: nowrap;
+  gap: 2vh;
+}
+
+
+#profile-name{
+  font-weight: bold;
+  color:rgb(83, 92, 101);
+  font-size: 2vh;
+}
+
+#middle-section{
+  display: flex;
+  flex-direction: row;
+  gap:2vh
+}
+#header{
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left:0
+}
+#hamburger-menu{
+  position: fixed;
+  width: 5vh;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+.page{
+  margin-left: 35px;
+  margin-top: 50px;
+}
+#website-title{
+  color: transparent;
+  font-weight: bolder;
+  background-clip: text;
+  background-image: linear-gradient(to right, #3498db, #ff69b4);
+  -webkit-background-clip: text;
+}
+.personal-path{
+  flex-direction: column;
+  align-items: center;
+}
+.voting{
+  flex-direction: column;
+  align-items: center;
+}
+
+.carat-container {
+  position: relative;
+  width: max-content;
+}
+
+.carat-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  font-size: 1.25rem;
+}
+.btn-carat-container {
+  position: relative;
+  overflow: hidden; /* Hide excess button height resulting from ::before pseudoelement */
+}
+
+.btn-carat-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  font-size: 1.25rem;
+  transition: opacity 0.2s ease-in-out; /* Optional animation effect for visibility toggle */
+}
+
+.btn-carat-visible .btn-carat-icon {
+  opacity: 1;
+}
+
+.btn-carat-hidden .btn-carat-icon {
+  opacity: 0;
+}
