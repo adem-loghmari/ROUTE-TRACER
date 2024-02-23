@@ -200,7 +200,7 @@ export function Header(){
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav id="middle-section" className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
-            <NavLink to="/About" className="nav-link">Forum</NavLink>
+            <NavLink to="/forum" className="nav-link">Forum</NavLink>
             <InputGroup>
               <Form.Control
                 type="search"

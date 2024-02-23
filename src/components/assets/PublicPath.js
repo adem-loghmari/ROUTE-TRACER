@@ -10,41 +10,44 @@ export function PublicPath({publicPaths}) {
   return (
     paths?.map((path)=>
       (
-      <Tab.Container>
-        <Row>
-          <Col sm={2}>
-            <div className='btn-group-vertical align-items-center'>
-              <button className='btn'><i className="fa fa-solid fa-arrow-up"></i></button>
-              {path.voteCount}
-              <button className='btn'><i className="fa fa-solid fa-arrow-down"></i></button>
-            </div>
-          </Col>
-          <Col sm={4}>
-            <ListGroup>
-              {path?.steps?.map((step)=>(
-                <ListGroup.Item
-                  className="btn btn-light w-100 rounded-0 shadow-sm border-bottom-0 px-4 py-2 fw-boldbtn-carat-container"
-                  aria-controls="collapseExample"
-                  aria-expanded={false}  
-                  action href={`#${step}`}
-                  >
-                  {step}
-                  <span className={`btn-carat-icon fas fa-caret-right`}></span>
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
-          </Col>
-          <Col sm={8}>
-            <Tab.Content>
-              {path?.resources?.map((resource,index)=>{  
-                <Tab.Pane eventKey={`#${path.steps[index]}`}>
-                  {resource}
-                </Tab.Pane>
-              })}
-            </Tab.Content>
-          </Col>
-        </Row>
-      </Tab.Container>
+      <div className='col-md-6 offset-md-4'>
+
+        <Tab.Container>
+          <Row>
+            <Col sm={2}>
+              <div className='btn-group-vertical align-items-center'>
+                <button className='btn'><i className="fa fa-solid fa-arrow-up"></i></button>
+                {path.voteCount}
+                <button className='btn'><i className="fa fa-solid fa-arrow-down"></i></button>
+              </div>
+            </Col>
+            <Col sm={5}>
+              <ListGroup>
+                {path?.steps?.map((step)=>(
+                  <ListGroup.Item
+                    className="btn btn-light w-100 rounded-0 shadow-sm border-bottom-0 px-4 py-2 fw-boldbtn-carat-container"
+                    aria-controls="collapseExample"
+                    aria-expanded={false}  
+                    action href={`#${step}`}
+                    >
+                    {step}
+                    <span className={`btn-carat-icon fas fa-caret-right`}></span>
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+            </Col>
+            <Col sm={16}>
+              <Tab.Content>
+                {path?.resources?.map((resource,index)=>{  
+                  <Tab.Pane eventKey={`#${path.steps[index]}`}>
+                    {resource}
+                  </Tab.Pane>
+                })}
+              </Tab.Content>
+            </Col>
+          </Row>
+        </Tab.Container>
+      </div>
     ))
     
   );

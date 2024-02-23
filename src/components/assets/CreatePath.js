@@ -58,69 +58,77 @@ const CreatePath = ({ steps, user }) => {
     }
   }
   return (
-    <div className="path-construction">
-      <Form className="adding-path ">
-        <Form.Label htmlFor="path"><h5>share your path</h5></Form.Label>
-        <Select
-          value={step}
-          options={options}
-          isSearchable={true}
-          placeholder={`Select your ${suffix} step...`}
-          onChange={(e) => {
-            setStep(e.value)
-          }}
-        />
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="sourceInput">Add your resource</Form.Label>
-          <Form.Control value={resource} onChange={(e) => setResource(e.target.value)} id="sourceInput"placeholder={`Add your ${suffix} path's resource`} />
-        </Form.Group>
-        <div className="d-flex">
-          <Button className="btn btn-success" onClick={submitStep}>Add step</Button>
+    <div className="row">
+      <div className="col-md-3">
 
-          {path.length!=0 &&
-            <>
-              <Button className="btn btn-primary" onClick={submitPath}>Submit Path</Button>
-              <h4>{message}</h4>
+        <Form className="adding-path ">
+          <Form.Label htmlFor="path"><h5>share your path</h5></Form.Label>
+          <Select
+            value={step}
+            options={options}
+            isSearchable={true}
+            placeholder={`Select your ${suffix} step...`}
+            onChange={(e) => {
+              setStep(e.value)
+            }}
+          />
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="sourceInput">Add your resource</Form.Label>
+            <Form.Control value={resource} onChange={(e) => setResource(e.target.value)} id="sourceInput"placeholder={`Add your ${suffix} path's resource`} />
+          </Form.Group>
+          <div className="d-flex">
+            <Button className="btn btn-success" onClick={submitStep}>Add step</Button>
+
+            {path.length!=0 &&
+              <>
+                <Button className="btn btn-primary" onClick={submitPath}>Submit Path</Button>
+                <h4>{message}</h4>
+            
+              </>
+            }
+          </div>
           
-            </>
-          }
-        </div>
-        
 
-      </Form>
-      <Tab.Container id="list-group-tabs-example">
-        <Row  >
-          <Col sm={12}>
-            <ListGroup as="ol" numbered>
-              {path?.map((step, index) => (
-                <div className="d-flex btn-group">
-                  <Button variant="danger" onClick={()=>{removeStep(index)}}>
-                    <i className="fa fa-solid fa-trash"></i>
-                  </Button>
-                  <ListGroup.Item  className="btn btn-light w-100 rounded-0 shadow-sm border-bottom-0 px-4 py-2 fw-boldbtn-carat-container"
-                  aria-controls="collapseExample"
-                  aria-expanded={false}  
-                  key={index}
-                  action
-                  href={`#${step}`}>
-                  {step}
-                  <span className={`btn-carat-icon fas fa-caret-right`}></span>
-                  </ListGroup.Item>
-                </div>
-              ))}
-            </ListGroup>
-          </Col>
-          <Col sm={16}>
-            <Tab.Content>
-              {resources?.map((resource, index) => (
-                <Tab.Pane key={index} eventKey={`#${path[index]}`}>
-                  {resource}
-                </Tab.Pane>
-              ))}
-            </Tab.Content>
-          </Col>
-        </Row>
-      </Tab.Container>
+        </Form>
+      </div>
+      <div className="col-md-2 offset-md-2">
+        <h5>
+          your path
+        </h5>
+        <Tab.Container id="list-group-tabs-example">
+          <Row  >
+            <Col sm={12}>
+              <ListGroup as="ol" numbered>
+                {path?.map((step, index) => (
+                  <div className="d-flex btn-group">
+                    <Button variant="danger" onClick={()=>{removeStep(index)}}>
+                      <i className="fa fa-solid fa-trash"></i>
+                    </Button>
+                    <ListGroup.Item  className="btn btn-light w-100 rounded-0 shadow-sm border-bottom-0 px-4 py-2 fw-boldbtn-carat-container"
+                    aria-controls="collapseExample"
+                    aria-expanded={false}  
+                    key={index}
+                    action
+                    href={`#${step}`}>
+                    {step}
+                    <span className={`btn-carat-icon fas fa-caret-right`}></span>
+                    </ListGroup.Item>
+                  </div>
+                ))}
+              </ListGroup>
+            </Col>
+            <Col sm={16}>
+              <Tab.Content>
+                {resources?.map((resource, index) => (
+                  <Tab.Pane key={index} eventKey={`#${path[index]}`}>
+                    {resource}
+                  </Tab.Pane>
+                ))}
+              </Tab.Content>
+            </Col>
+          </Row>
+        </Tab.Container>
+      </div>
     </div>
   );
 };

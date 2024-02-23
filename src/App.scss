@@ -90,3 +90,28 @@
 .btn-carat-hidden .btn-carat-icon {
   opacity: 0;
 }
+.grid-container {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  grid-gap: 1rem; /* Adjust the gap as needed */
+}
+
+.left-column {
+  grid-column: 1;
+  background-color: #f0f0f0; /* Optional styling */
+  padding: 1rem;
+}
+
+.centered-column {
+  grid-column: 2;
+  justify-self: center;
+  background-color: #e0e0e0; /* Optional styling */
+  padding: 1rem;
+}
+
+.single-column {
+  grid-column: 1; /* Spans entire row */
+  justify-self: center;
+  background-color: #d0d0d0; /* Optional styling */
+  padding: 1rem;
+}

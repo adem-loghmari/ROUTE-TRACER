@@ -44,8 +44,8 @@ export function TheComponent(){
     <main className="page">
       {/*<button onClick={()=>{updateDoc(doc(collection(db,"pages"),"mobile-development"),{steps:steps})}}>hello</button>*/}
       {/*<button onClick={()=>console.log(data)}>hello</button>*/}
-      <div className='paths-intro'>
-        <h1 className='title text-center'>
+      <div className='jumbotron text-center'>
+        <h1 className='display-4'>
           Find the best path for {data.subject} 
         </h1>  
       </div>
@@ -60,19 +60,16 @@ export function TheComponent(){
       </div>
       }
         
-      <div id="public-path" className=''>
+      <div id="public-path" className='.container-fluid'>
           <div className='d-flex justify-content-sm-center align-self-center'>
               <h5>What people think</h5>
           </div>
-        <div className=''>
           {auth.currentUser && 
             <CreatePath steps={data.steps} user={auth?.currentUser?.uid}/>
           }
-                 
-          <div id="public-path-box">
+          <div className='row'>
             <PublicPath publicPaths={data.publicPaths}/>
           </div>
-        </div>
       </div>
     </main>
     )
