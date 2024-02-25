@@ -49,7 +49,7 @@ const CreatePath = ({ steps, user }) => {
   }, [path.length]);
   const submitPath = async () => {
     try{
-      await updateDoc(doc(db,'pages',page),{publicPaths:arrayUnion(JSON.stringify({steps:path,resources:resources,voteCount:0,pathBuilder:user}))});
+      await updateDoc(doc(db,'pages',page),{publicPaths:arrayUnion({steps:path,resources:resources,voteCount:0,pathBuilder:user})});
       setPath([]);
       setResource([]);
       setStep("");
