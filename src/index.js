@@ -13,12 +13,12 @@ import {Home} from './pages/Home'
 const router = createBrowserRouter([
   {
   path:'/',
-  element:<>
+  element:<div className='page'>
             <Layout/>
             <div className='page'>
               <Home/>
             </div>
-          </>
+          </div>
   },
   {
     path:'*',
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path:'/:id',
-    element:<div id="the-app">
+    element:<div className='page'>
               <div>
                 <Layout/>
               </div>

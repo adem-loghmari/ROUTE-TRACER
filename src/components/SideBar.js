@@ -182,7 +182,7 @@ export class SideBar extends Component {
           onItemClick={this.handleClick}
         />
         {/* using in our button to open the sidebar */}
-        <button className="btn btn-light" id="hamburger-menu" onClick={() => this.handleSidebarToggle(true)}><i className="fa fa-solid fa-angle-right"></i></button>
+        <button className="btn" id="hamburger-menu" onClick={() => this.handleSidebarToggle(true)}><i className="fa fa-solid fa-angle-right"></i></button>
       </div>
     );
   }

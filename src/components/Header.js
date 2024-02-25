@@ -194,9 +194,9 @@ export function Header(){
 
 
   return( 
-    <Navbar expand="lg" className="bg-body-tertiary" id="header">
+    <Navbar expand="lg"id="header">
       <Container fluid>
-        <Navbar.Brand href="/" id="website-title">ROUTE TRACER</Navbar.Brand>
+        <Navbar.Brand href="/">ROUTE TRACER</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav id="middle-section" className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll >
@@ -207,7 +207,7 @@ export function Header(){
                 placeholder="Search"
                 aria-label="Search"
               />
-              <Button variant="outline-info"><i className="fa fa-search"></i></Button>
+              <Button variant="outline-success"><i className="fa fa-search"></i></Button>
             </InputGroup>
           
           </Nav>

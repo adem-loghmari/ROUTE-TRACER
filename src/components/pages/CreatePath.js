@@ -11,8 +11,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 const CreatePath = ({ steps, user }) => {
   const options = steps?.map((step) => ({ value: step, label: step }));
-  const page = useParams().id;
-  const [pathId,setPathId] = useState(1)
+  const page = useParams().id; 
   const [path, setPath] = useState([]);
   const [resources, setResources] = useState([]);
   const [step, setStep] = useState("");
@@ -50,7 +49,11 @@ const CreatePath = ({ steps, user }) => {
   }, [path.length]);
   const submitPath = async () => {
     try{
-      await updateDoc(doc(db,'pages',page),{publicPaths:arrayUnion(JSON.stringify({steps:path,resources:resources,voteCount:0,pathBuilder:user}))})
+      await updateDoc(doc(db,'pages',page),{publicPaths:arrayUnion(JSON.stringify({steps:path,resources:resources,voteCount:0,pathBuilder:user}))});
+      setPath([]);
+      setResource([]);
+      setStep("");
+      setResource("");
       setMessage('path posted successfully');
     }catch(err){
       setMessage('something went wrong');
@@ -58,49 +61,49 @@ const CreatePath = ({ steps, user }) => {
     }
   }
   return (
-    <div className="row">
-      <div className="col-md-3">
+    <div>
+      <div>
 
         <Form className="adding-path ">
-          <Form.Label htmlFor="path"><h5>share your path</h5></Form.Label>
+          <Form.Label htmlFor="path"><h6 className="inputLabels">share your path</h6></Form.Label>
           <Select
             value={step}
             options={options}
             isSearchable={true}
             placeholder={`Select your ${suffix} step...`}
             onChange={(e) => {
-              setStep(e.value)
+              setStep(e.value);
+              setMessage("")
             }}
           />
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="sourceInput">Add your resource</Form.Label>
+            <Form.Label htmlFor="sourceInput"><h6 className="inputLabels">Add your resource</h6></Form.Label>
             <Form.Control value={resource} onChange={(e) => setResource(e.target.value)} id="sourceInput"placeholder={`Add your ${suffix} path's resource`} />
           </Form.Group>
-          <div className="d-flex">
+          <div className="d-flex some-gap justify-content-center">
             <Button className="btn btn-success" onClick={submitStep}>Add step</Button>
 
             {path.length!=0 &&
-              <>
                 <Button className="btn btn-primary" onClick={submitPath}>Submit Path</Button>
-                <h4>{message}</h4>
-            
-              </>
-            }
+              }
           </div>
+          <h4 className="text-center">{message}</h4>
           
 
         </Form>
       </div>
-      <div className="col-md-2 offset-md-2">
-        <h5>
-          your path
-        </h5>
+      <div>
+        {path.length!=0 &&
+          <h5 className="text-center">
+            your path
+          </h5>
+        }
         <Tab.Container id="list-group-tabs-example">
-          <Row  >
+          <Row>
             <Col sm={12}>
-              <ListGroup as="ol" numbered>
+              <ListGroup as="ol" numbered className="some-gap">
                 {path?.map((step, index) => (
-                  <div className="d-flex btn-group">
+                  <div className="d-flex">
                     <Button variant="danger" onClick={()=>{removeStep(index)}}>
                       <i className="fa fa-solid fa-trash"></i>
                     </Button>
