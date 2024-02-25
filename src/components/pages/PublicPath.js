@@ -8,10 +8,24 @@ import { collection, addDoc , getDocs,doc,setDoc,getDoc , updateDoc ,arrayUnion,
 import { db } from '../../config/firebase';
 import { useParams } from 'react-router';
 import { useEffect } from 'react';
-export function PublicPath({publicPaths}) {
-  const page = useParams().id
-  const paths = publicPaths?.map((path)=>JSON.parse(path))
-  
+export function PublicPath({publicPaths,isActive}) {
+  const page = useParams().id;
+  const paths = publicPaths;
+  async function handleVote(sign,path){
+    if (isActive){
+      let updatedPath =path;
+      updatedPath.voteCount= sign=="+" ? path.voteCount+1 : path.voteCount-1; 
+      const ref= doc(db,"pages",page)
+      await updateDoc(ref, {
+        publicPaths: arrayRemove(path)
+      });
+      await updateDoc(ref, {
+        publicPaths: arrayUnion(updatedPath)
+      });
+    
+    // Atomically remove a region from the "regions" array field.
+    }
+  }
   return (
     <div className='d-flex justify-content-center align-self-center'>
       <div className='d-flex  align-items-start flex-column'>
@@ -19,11 +33,13 @@ export function PublicPath({publicPaths}) {
         (
             <div className='d-flex justify-content-center align-items-center'>
                   <div className='btn-group-vertical align-items-center'>
-                    <button className='btn'>
+                    <button className='btn' onClick={async()=>await handleVote("+",path)}>
                       <i className="fa fa-solid fa-arrow-up"></i>
                     </button>
                     {path.voteCount}
-                    <button className='btn'><i className="fa fa-solid fa-arrow-down"></i></button>
+                    <button className='btn' onClick={async()=>{await handleVote("-",path);console.log(path)}}>
+                      <i className="fa fa-solid fa-arrow-down"></i>
+                    </button>
                   </div>
                   <div>
                   <ListGroup>
