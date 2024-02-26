@@ -46,13 +46,11 @@ export function TheComponent(){
     }
     getData();
     getUser();
-    console.log("hello")
   },[refresh])
 
   return(
     <main className="page">
       {/*<button onClick={()=>{updateDoc(doc(collection(db,"pages"),"mobile-development"),{steps:steps})}}>hello</button>*/}
-      <button onClick={()=>console.log(data.publicPaths)}>hello</button>
       <div className='jumbotron text-center'>
         <h1 className='display-4'>
           Find the best path for {data.subject} 
