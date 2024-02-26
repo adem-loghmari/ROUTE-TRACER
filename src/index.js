@@ -15,7 +15,7 @@ const router = createBrowserRouter([
   path:'/',
   element:<div className='page'>
             <Layout/>
-            <div className='page'>
+            <div className='home-page'>
               <Home/>
             </div>
           </div>

@@ -4,7 +4,7 @@ import {getAuth,GoogleAuthProvider} from "firebase/auth"
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
+  apiKey: "AIzaSyBsONb3CDwVMFYlLnZ_0HT4ATEJcjbfHP8",
   authDomain: "route-tracer-3d08b.firebaseapp.com",
   projectId: "route-tracer-3d08b",
   storageBucket: "route-tracer-3d08b.appspot.com",
