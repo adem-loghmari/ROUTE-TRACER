@@ -2,12 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {auth} from "../config/firebase.js";
 import { collection, addDoc , getDocs,doc,setDoc,getDoc , updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase.js";
-
-import Col from 'react-bootstrap/Col';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Row from 'react-bootstrap/Row';
-import Tab from 'react-bootstrap/Tab';
-
 import { useParams } from 'react-router-dom';    
 import CreatePath from './pages/CreatePath.js';
 import { PublicPath } from './pages/PublicPath.js';
@@ -25,8 +19,9 @@ addDoc(collection(db,"collectionName"),{=> YOUR DATA <=}) with random doc ID (NE
 export function TheComponent(){
   const [data,setData] = useState({}); //the page document : webdev object for example
   const [user,setUser] = useState({});
+  const [tester,setTester] = useState(0)
   const page=useParams().id
-  
+  const [refresh,setRefresh] = useState(false)
   useEffect(()=>{
     const getUser = async () =>{
       try{
@@ -50,14 +45,14 @@ export function TheComponent(){
       }
     }
     getData();
-    getUser()
-
-  },[])
+    getUser();
+    console.log("hello")
+  },[refresh])
 
   return(
     <main className="page">
       {/*<button onClick={()=>{updateDoc(doc(collection(db,"pages"),"mobile-development"),{steps:steps})}}>hello</button>*/}
-      {/*<button onClick={()=>console.log(user?.personalPaths[page])}>hello</button>*/}
+      <button onClick={()=>console.log(data.publicPaths)}>hello</button>
       <div className='jumbotron text-center'>
         <h1 className='display-4'>
           Find the best path for {data.subject} 
@@ -85,11 +80,11 @@ export function TheComponent(){
               <div className='d-flex justify-content-sm-center align-self-center'>
                   <h5>What people think</h5>
               </div>
-              <PublicPath publicPaths={data?.publicPaths} isActive={auth?.currentUser ? true : false}/>
+              <PublicPath refresh={setRefresh} publicPaths={data?.publicPaths} isActive={auth?.currentUser ? true : false}/>
             </div>
             <div className='col-md-3 ml-md-auto create'>
               {auth.currentUser && 
-                <CreatePath steps={data.steps} user={auth?.currentUser?.uid}/>
+                <CreatePath refresh={setRefresh} steps={data.steps}  user={auth?.currentUser?.uid}/>
               }
             </div>
           </div>
