@@ -4,28 +4,45 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 
-import { collection, addDoc , getDocs,doc,setDoc,getDoc , updateDoc ,arrayUnion, arrayRemove} from "firebase/firestore";
+import { collection, addDoc , getDocs,doc,setDoc,getDoc , updateDoc ,arrayUnion, arrayRemove,runTransaction} from "firebase/firestore";
 import { db } from '../../config/firebase';
 import { useParams } from 'react-router';
 import { useEffect } from 'react';
-export function PublicPath({publicPaths,isActive}) {
+import { useState } from 'react';
+export function PublicPath({refresh,publicPaths,isActive}) {
+  
   const page = useParams().id;
-  const paths = publicPaths;
-  async function handleVote(sign,path){
-    if (isActive){
-      let updatedPath =path;
-      updatedPath.voteCount= sign=="+" ? path.voteCount+1 : path.voteCount-1; 
-      const ref= doc(db,"pages",page)
-      await updateDoc(ref, {
-        publicPaths: arrayRemove(path)
-      });
-      await updateDoc(ref, {
-        publicPaths: arrayUnion(updatedPath)
-      });
-    
-    // Atomically remove a region from the "regions" array field.
+  const paths=publicPaths
+  
+  async function handleVote(sign, path) {
+    if (isActive) {
+      const updatedPath = { ...path }; // Create a new object
+      if (sign === "+") {
+        updatedPath.voteCount += 1;
+      } else if (sign === "-") {
+        updatedPath.voteCount = Math.max(0, path.voteCount - 1);
+      }
+  
+      try {
+        await runTransaction(db, async (transaction) => {
+          const docRef = doc(db, "pages", page);
+          const docSnapshot = await transaction.get(docRef);
+          const publicPaths = docSnapshot.data().publicPaths;
+  
+          const updatedPaths = publicPaths.map((p) =>
+            p.id === path.id ? updatedPath : p
+          );
+  
+          transaction.update(docRef, { publicPaths: updatedPaths });
+        });
+      } catch (error) {
+        console.error("Error in handleVote transaction:", error);
+        // Handle the error (e.g., show an error message to the user)
+      }
+      refresh((prev)=>!prev)
     }
   }
+  
   return (
     <div className='d-flex justify-content-center align-self-center'>
       <div className='d-flex  align-items-start flex-column'>
@@ -33,11 +50,11 @@ export function PublicPath({publicPaths,isActive}) {
         (
             <div className='d-flex justify-content-center align-items-center'>
                   <div className='btn-group-vertical align-items-center'>
-                    <button className='btn' onClick={async()=>await handleVote("+",path)}>
+                    <button className='btn' onClick={handleVote.bind(null, "+", path)}>
                       <i className="fa fa-solid fa-arrow-up"></i>
                     </button>
                     {path.voteCount}
-                    <button className='btn' onClick={async()=>{await handleVote("-",path);console.log(path)}}>
+                    <button className='btn' onClick={handleVote.bind(null, "-", path)}>
                       <i className="fa fa-solid fa-arrow-down"></i>
                     </button>
                   </div>
