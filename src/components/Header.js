@@ -11,7 +11,6 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import InputGroup from 'react-bootstrap/InputGroup';
-
 export function Header(){
   const [load,setLoad] = useState(false)
   const [sign,setSign] = useState(""); 
@@ -41,6 +40,8 @@ export function Header(){
           setLoad(!load);
           if(load==false){
             handleClose();
+            window.location.reload()
+
           }
         }
         catch (error) {
@@ -73,6 +74,7 @@ export function Header(){
           setLoad(!load);
           if(load==false){
             handleClose();
+            window.location.reload()
           }
         } catch (err) {
           console.error(err);
@@ -121,6 +123,8 @@ export function Header(){
           setLoad(!load);
           if(load==false){
       handleClose();
+      window.location.reload()
+
     }
         }
         catch(err){
@@ -133,6 +137,8 @@ export function Header(){
           setLoad(!load);
           if(load==false){
             handleClose();
+            window.location.reload()
+
           }
         }
         catch(err){
@@ -185,6 +191,8 @@ export function Header(){
       setLoad(!load);
       if(load==false){
         handleClose();
+        window.location.reload()
+
       }
     }
     catch(err){

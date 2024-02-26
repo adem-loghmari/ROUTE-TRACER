@@ -19,7 +19,6 @@ addDoc(collection(db,"collectionName"),{=> YOUR DATA <=}) with random doc ID (NE
 export function TheComponent(){
   const [data,setData] = useState({}); //the page document : webdev object for example
   const [user,setUser] = useState({});
-  const [tester,setTester] = useState(0)
   const page=useParams().id
   const [refresh,setRefresh] = useState(false)
   useEffect(()=>{
