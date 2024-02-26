@@ -4,13 +4,13 @@ import {getAuth,GoogleAuthProvider} from "firebase/auth"
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBsONb3CDwVMFYlLnZ_0HT4ATEJcjbfHP8",
-  authDomain: "route-tracer-3d08b.firebaseapp.com",
-  projectId: "route-tracer-3d08b",
-  storageBucket: "route-tracer-3d08b.appspot.com",
-  messagingSenderId: "774235150992",
-  appId: "1:774235150992:web:5e1e42fc2b56e812445615",
-  measurementId: "G-2CQH4FHRML"
+  apiKey: "AIzaSyDLQRAO09QXALDs4l1CLUBNcOCq593kAXQ",
+  authDomain: "route-tracer-33520.firebaseapp.com",
+  projectId: "route-tracer-33520",
+  storageBucket: "route-tracer-33520.appspot.com",
+  messagingSenderId: "521810186197",
+  appId: "1:521810186197:web:ed84136e31456ab567775c",
+  measurementId: "G-DXK5L6P7R7"
 };
 
 const app = initializeApp(firebaseConfig);
