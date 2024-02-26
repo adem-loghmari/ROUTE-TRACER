@@ -9,7 +9,9 @@ import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
-const CreatePath = ({ steps, user }) => {
+import { v4 as uuidv4 } from 'uuid';
+
+const CreatePath = ({ refresh,steps, user }) => {
   const options = steps?.map((step) => ({ value: step, label: step }));
   const page = useParams().id; 
   const [path, setPath] = useState([]);
@@ -49,7 +51,8 @@ const CreatePath = ({ steps, user }) => {
   }, [path.length]);
   const submitPath = async () => {
     try{
-      await updateDoc(doc(db,'pages',page),{publicPaths:arrayUnion({steps:path,resources:resources,voteCount:0,pathBuilder:user})});
+      await updateDoc(doc(db,'pages',page),{publicPaths:arrayUnion({id:uuidv4(),steps:path,resources:resources,voteCount:0,pathBuilder:user})});
+      refresh((prev)=>!prev)
       setPath([]);
       setResource([]);
       setStep("");
